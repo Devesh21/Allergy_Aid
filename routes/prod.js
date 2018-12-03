@@ -5,61 +5,134 @@ const prodData=data.prod;
 
 
 const getAll=async function getAll(req,res) {
-    try{
         const prodList=await prodData.getAllProds();
-        res.json(prodList);
-    }catch(e){
-        res.status(500).json({error:e});
-    }
+        res.render("prods/displayAll",{prods:prodList});
 }
 router.get("/",getAll);
 
 const getById=async function getById(req,res){
-    try{
         const prod=await prodData.getProdById(req.params.id);
-        res.json(prod);
-    }catch(e){
-        res.status(500).json({error:e});
-    }
+        res.render("prods/displayItem",{prod:prod});
 }
 router.get("/id/:id",getById);
 
-const postProd=async function postProd(req,res){
-    try{
-        const Pname=req.body.Pname;
-        const S_id=req.body.S_id;
-        const ingredients=req.body.ingredients;
-        const description=req.body.description;
-        const newProd=await prodData.addProd(Pname,S_id,ingredients,description);
-        res.json(newProd);
-    }catch(e){
-        res.status(500),json({ error: e});
-    }
+//addProd
+const getAdd=function getAdd(req,res){
+    res.render("prods/addItem");
 }
-router.post("/",postProd);
+router.get("/addItem",getAdd);
 
+const postProd=async function postProd(req,res){
+    let postData=req.body;
+    let errors=[];
+    if (!postData.Pname) {
+        errors.push("No Pname provided");
+    }
+    if (!postData.S_id) {
+        errors.push("No S_id provided");
+    }
+    if (!postData.ingredients) {
+        errors.push("No ingredients provided");
+    }
+    if (!postData.description) {
+        errors.push("No description provided");
+    }
+    if (errors.length > 0) {
+        res.render("prods/addItem", {
+          errors: errors,
+          hasErrors: true,
+          post: postData
+        });
+        return;
+    }
+    try {
+        const newProd = await prodData.addProd(
+            postData.Pname,
+            postData.S_id,
+            postData.ingredients,
+            postData.description
+        );
+        res.redirect(`/prod/id/${newProd._id}`);
+      } catch (e) {
+        res.status(500).json({ error: e });
+      }
+}
+router.post("/addItem",postProd);
+//end addProd
+
+//searchProd
 const searchProd=async function searchProd(req,res){
     try{
         const prod=await prodData.searchProd(req.params.Pname);
-        res.json(prod);
+        if(prod.length==0){
+            res.render("prods/searchResultwrong");
+        }else{
+            res.render("prods/searchResult",{prods:prod});
+        }
     }catch(e){
         res.status(500).json({error:e});
     }
 }
 router.get("/search/:Pname",searchProd);
 
-//Still wording on addComment
+const getSearch=function getSearch(req,res){
+    res.render("prods/searchItem");
+}
+router.get("/search",getSearch);
+
+const postSearch=async function postSearch(req,res){
+    let postData=req.body;
+    let errors=[];
+    if (!postData.Pname) {
+        errors.push("No Pname provided");
+    }if (errors.length > 0) {
+        res.render("prods/searchItem", {
+          errors: errors,
+          hasErrors: true,
+          post: postData
+        });
+        return;
+    }
+    res.redirect(`/prod/search/${req.body.Pname}`);
+}
+router.post("/search",postSearch);
+//end searchProd
+
+//addComment
+const getAddcomment=function getAddcomment(req,res){
+    let thisid=req.params.id;
+    res.render("prods/addFeedback",{id:thisid});
+}
+router.get("/addComment/:id",getAddcomment);
+
 const addComment=async function addComment(req,res){
+    const id=req.params.id;
+    let postData=req.body;
+    let errors=[];
+    if (!postData.comment) {
+        errors.push("No feedback provided");
+    }
+    if (errors.length > 0) {
+        res.render("prods/addFeedback", {
+          id:id,
+          errors: errors,
+          hasErrors: true,
+          post: postData
+        });
+        return;
+    }
     try{
         const newCom=req.body.comment;
-        const newProd=await prodData.addComment(req.params.id);
-        res.json(newProd);
+        const id=req.params.id;
+        await prodData.addComment(id,newCom);
+        res.redirect(`/prod/id/${id}`);
     }catch(e){
         res.status(500).json({error:e});
     }
 }
 router.post("/addComment/:id",addComment);
 
+//deleteProd still wroking.
 const dropProd=async function dropProd(req,res){
     try{
         await prodData.getProdById(req.params.id);
@@ -68,12 +141,12 @@ const dropProd=async function dropProd(req,res){
     }
     try{
         await prodData.dropProd(req.params.id);
-        res.status(200).json({"deleted":"OK"});
+        const prodList=await prodData.getAllProds();
+        res.render("prods/displayAll",{prods:prodList});
     }catch(e){
         res.status(500).json({error:e});
     }
 }
-
 router.delete("/id/:id",dropProd);
 
 module.exports=router;
