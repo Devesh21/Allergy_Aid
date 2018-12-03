@@ -5,7 +5,7 @@ const uuid = require("node-uuid");
 
 const getAllProds=async function getAllProds(){
     const prodCollection=await prods();
-    return await prodCollection.find({}).toArray();
+    return prodCollection.find({}).toArray();
 }
 
 const getProdById=async function getProdById(id){
@@ -19,7 +19,7 @@ const getProdById=async function getProdById(id){
 const addProd=async function addProd(Pname,S_id,ingredients,description){
     if(typeof Pname!=="string") throw "No name provided";
     if(typeof S_id!=="string") throw "No store Id provided";
-    if(!Array.isArray(ingredients)) throw "No ingredient provided";
+    if(typeof ingredients!=="string") throw "No ingredient provided";
     if(typeof description!=="string") throw "No description provided";
     const comment=[];
     const prodCollection=await prods();
@@ -38,16 +38,15 @@ const addProd=async function addProd(Pname,S_id,ingredients,description){
 const searchProd=async function searchProd(Pname){
     const prodCollection=await prods();
     const prod=await prodCollection.find({Pname:Pname}).toArray();
-
-    if(!prod) throw Pname;
     return prod;
 }
 
 const addComment=async function addComment(id,comment){
     const prodCollection=await prods();
-    const prod=await this.getProdById(id);
+    const prod=await prodCollection.findOne({_id:id});
+    if(!prod) throw `Could not find production with id of ${id}`;
     const temComment=prod.feedback;
-    temComment.append(comment);
+    temComment.push(comment);
     await prodCollection.updateOne({_id:id},{$set:{feedback:temComment}})
     return await this.getProdById(id);
 }
