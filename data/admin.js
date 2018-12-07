@@ -28,6 +28,40 @@ const exportedMethods = {
     const newInsertInformation = await adminCollection.insertOne(newAdmin);
     const newId = newInsertInformation.insertedId;
     return await this.getAdminById(newId);
+  },
+
+  async getStoreById(id) {
+    const adminCollection = await admin();
+    const store = await adminCollection.findOne({ _id: id });
+
+    if (!store) throw "Store not found";
+    return store;
+  },
+  async addStore(storeName, address, phoneNo, email) {
+    if (typeof storeName !== "string") throw "Store Name is not provided in string";
+    if (typeof phoneNo !== "number") throw "Format of Phone number is not correct";
+
+    const adminCollection = await admin();
+
+    const newStore = {
+      storeName: storeName,
+      address: address,
+      phoneNo: phoneNo,
+      email:email,
+      _id: uuid.v4()
+    };
+
+    const newStoreInformation = await adminCollection.insertOne(newStore);
+    const newStoreId = newStoreInformation.insertedId;
+    return await this.getStoreById(newStoreId);
+  },
+  async removeStore(id) {
+    const adminCollection = await admin();
+    const deleteStoreInfo = await adminCollection.removeOne({ _id: id });
+    if (deleteStoreInfo.deletedCount === 0) {
+      throw `Could not delete Store with id of ${id}`;
+    }
+    console.log("Store deleted successfully ! ");
   }
 };
 
