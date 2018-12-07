@@ -5,5 +5,6 @@ const prodData = require('./prod');
 module.exports = {
     users : userData,
     stores : storeData,
-    prod : prodData
+    prod : prodData,
+    admin:adminData
 }
