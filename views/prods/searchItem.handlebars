@@ -1,0 +1,17 @@
+<h1>Search</h1>
+<form action="/prod/search" method="POST">
+    <label>
+        Prod Name
+        <input type="text" name="Pname" placeholder="Prod Name" value="{{prod.Pname}}"/>
+    </label>
+    <button type="submit">Search!</button>
+</form>
+{{#if hasErrors}}
+<ul>
+    {{#each errors}}
+    <li>
+        {{this}}
+    </li>
+    {{/each}}
+</ul>
+{{/if}}
