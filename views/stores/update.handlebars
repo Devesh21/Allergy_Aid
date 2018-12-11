@@ -1,0 +1,29 @@
+<h1>Update</h1>
+<form action="/stores/id" method="PATCH" id = "update-form">
+    <label>
+        Store Name
+        <input type="text" name="storeName" placeholder="Store Name" value="{{stores.storeName}}"/>
+    </label>
+    <label>
+        Store Address
+        <input type="text" name="address" placeholder="Store Address" value="{{stores.address}}"/>
+    </label>
+    <label>
+        Phone Number
+        <input type="text" name="phone" placeholder="Phone Number" value="{{stores.phone_no}}"/>
+    </label>
+    <label>
+        Email
+        <input type="text" name="email" placeholder="Email" value="{{stores.email}}"/>
+    </label>
+    <button type="submit">Update</button>
+</form>
+{{#if hasErrors}}
+<ul>
+    {{#each errors}}
+    <li>
+        {{this}}
+    </li>
+    {{/each}}
+</ul>
+{{/if}}
