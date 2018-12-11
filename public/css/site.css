@@ -1,0 +1,25 @@
+
+h1 {
+    color: #0d4863;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 2rem;
+    align-self: center;
+}
+main {
+    max-width: 75%;
+    margin: auto;
+}
+
+body {
+    background: #cce8f5;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 15pt;
+}
+.success {
+    color: #28a745;
+}
+
+.error {
+    color: #dc3545;
+}
+
