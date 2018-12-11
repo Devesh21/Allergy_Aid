@@ -19,6 +19,9 @@ const storeData = data.stores // suppose we have stores.js file in data folder
 router.get("/", async (req, res) => {
 	try {
 		const allStores = await storeData.getAllStores();
+		res.render("stores/displayAll", {
+			stores: allStores
+		});
 	}catch(e) {
 		res.status(404).json({message:"Stores not found"});
 	}
