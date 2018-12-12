@@ -1,4 +1,11 @@
+body {
+    background-color: rgb(255, 231, 214);
+  }
+  img {
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
 
-img {
-    align-self: center;
-}
+
