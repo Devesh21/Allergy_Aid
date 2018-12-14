@@ -2,6 +2,13 @@ const express = require("express");
 const app = express();
 const configRoutes = require("./routes");
 const bodyParser = require("body-parser");
+const exphbs=require("express-handlebars");
+
+app.use("/public",static);
+app.use(bodyParser.urlencoded());
+
+app.engine("handlebars",exphbs({defaultLayout:"main"}));
+app.set("view engine","handlebars");
 
 app.use(bodyParser.json());
 configRoutes(app);
