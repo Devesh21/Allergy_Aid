@@ -3,7 +3,7 @@ const app = express();
 const configRoutes = require("./routes");
 const bodyParser = require("body-parser");
 const exphbs=require("express-handlebars");
-
+const static = express.static(__dirname+"/prod");
 app.use("/public",static);
 app.use(bodyParser.urlencoded());
 
