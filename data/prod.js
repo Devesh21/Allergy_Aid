@@ -41,9 +41,13 @@ const searchProd=async function searchProd(Pname){
     return prod;
 }
 
-// const filtersearchProd=async function filtersearchProd(Pname,UserInfo){
+const filtersearchProd=async function filtersearchProd(Pname,UserInfo){
+    const prodCollection=await prods();
 
-// }
+
+
+    const prod=await prodCollection.find({Pname:Pname}).toArray();
+}
 
 const addComment=async function addComment(id,comment){
     const prodCollection=await prods();
