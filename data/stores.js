@@ -20,6 +20,23 @@ let exportedMethods = {
 			});
 		});
 	},
+	/* addStore: add new store manager */
+	addStore(storeName,address,phone_no,email) {
+		return stores().then(storeCollection => {
+			let newStore = {
+				storeName: storeName,
+				address: address,
+				phone_no: phone_no,
+				email: email,
+				_id: uuid.v4()
+			};
+			return storeCollection.insertOne(newStore).then(newInsertedStore => {
+				return newInsertedStore.insertedId;
+			}).then(newId => {
+				return this.getById(newId);
+			});
+		});
+	},
 	/* updateStore: update store informaion */
 	updateStore(id,storeName,address,phone_no,email) {
 		return stores().then(storeCollection => {
