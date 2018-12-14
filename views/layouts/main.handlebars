@@ -4,7 +4,7 @@
 <!--meta info-->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{title}}</title>
+  <title> {{title}} </title>
   <!--css link-->
   <link rel="stylesheet" href="/public/css/site.css">
   <!--bootstrap info-->
@@ -33,7 +33,7 @@
 
     <ul class="nav navbar-nav navbar-right">
         <a href="/index/about"> About </a>
-        <a href="/index/homepage"><i class="fa fa-fw fa-home"></i> Home </a>
+        <a href="/"><i class="fa fa-fw fa-home"></i> Home </a>
         <a href="/index/login"><i class="fa fa-fw fa-sign-in"></i> login </a>
         <a href="/users/signup"><i class="fa fa-fw fa-user"></i> User signup</a>
         <a href="stores/signup"><i class="fa fa-fw fa-user"></i> Store signup</a>
@@ -65,7 +65,7 @@ document.getElementById("form-logout").submit();
 }
 </script>
 		
-<form method="post" action="/user/logout" id="form-logout"></form>
+<form method="post" action="/users/logout" id="form-logout"></form>
 
 </body>
 </html>
