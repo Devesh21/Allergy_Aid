@@ -37,7 +37,7 @@ const addProd=async function addProd(Pname,S_id,ingredients,description){
 
 const searchProd=async function searchProd(Pname){
     const prodCollection=await prods();
-    const prod=await prodCollection.find({Pname:Pname}).toArray();
+    const prod=await prodCollection.find({Pname:eval("/"+Pname+"/i") }).toArray();
     return prod;
 }
 
