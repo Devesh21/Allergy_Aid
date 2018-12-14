@@ -29,7 +29,7 @@
 }
 
 body{
-    background-image: url(store.jpg);
+    background-image: url(/public/css/images/store.jpg);
 
     }
 h1,h2{
