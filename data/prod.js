@@ -43,10 +43,21 @@ const searchProd=async function searchProd(Pname){
 
 const filtersearchProd=async function filtersearchProd(Pname,UserInfo){
     const prodCollection=await prods();
-
-
-
     const prod=await prodCollection.find({Pname:Pname}).toArray();
+    const allergy=UserInfo.allergy.split(",");
+    const index=[];
+    prod.forEach(element=> {
+        allergy.forEach(innerelement=>{
+            if(element.ingredients.split(",").includes(innerelement)){
+                index.push(prod.indexOf(element));
+            }
+        })
+    });
+    index.reverse();
+    index.forEach(index=>{
+        prod.splice(index,1);
+    })
+    return prod;
 }
 
 const addComment=async function addComment(id,comment){
