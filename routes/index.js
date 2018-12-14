@@ -3,6 +3,7 @@ const prodRoutes = require("./prod");
 const storeRoutes = require("./stores");
 const adminRoutes = require("./admin");
 
+
 const constructorMethod = app => {
   app.use("/users", userRoutes);
   app.use("/stores", storeRoutes);

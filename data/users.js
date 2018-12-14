@@ -45,7 +45,48 @@ let exportedMethods = {
             throw "Could not delete given user";
         }
         return userInfo;
-    }
+    },
+
+    /* Updated Part */
+    async updateUser(id, updatedUser) {
+        const usersCollection = await users();
+    
+        const updatedUserData = {};
+    
+        if (updatedUser.fname) {
+            updatedUserData.fname = updatedUser.fname;
+        }
+    
+        if (updatedUser.lName) {
+            updatedUserData.lName = updatedUser.lName;
+        }
+    
+        if (updatedUser.email) {
+            updatedUserData.email = updatedUser.email;
+        }
+
+        if (updatedUser.password) {
+            updatedUserData.password = updatedUser.password;
+        }
+    
+        if (updatedUser.address) {
+            updatedUserData.address = updatedUser.address;
+        }
+    
+        if (updatedUser.allergy) {
+            updatedUserData.allergy = updatedUser.allergy;
+        }
+    
+        let updateCommand = {
+          $set: updatedPostData
+        };
+        const query = {
+          _id: id
+        };
+        await usersCollection.updateOne(query, updateCommand);
+    
+        return await this.getUserById(id);
+      }
 
 }
 
