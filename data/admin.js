@@ -1,6 +1,13 @@
 const mongoCollections = require("../config/mongoCollections");
 const admin = mongoCollections.admin;
 const uuid = require("node-uuid");
+const bcrypt=require("bcrypt");
+const saltRounds = 16;
+
+function generateHashedPassword(password) {
+	return bcrypt.hashSync(password, 10);
+}
+
 
 const exportedMethods = {
 
@@ -11,6 +18,12 @@ const exportedMethods = {
     if (!adminstrator) throw "Adminstrator not found";
     return adminstrator;
   },
+
+  async getAdminDetails() {
+    const adminCollection = await admin();
+    const adminDetails = await adminCollection.find({}).toArray();
+    return adminDetails;
+},
   async addAdmin(username, password, fName, lName) {
     if (typeof fName !== "string") throw "First name is not provided in string";
     if (typeof lName !== "string") throw "Last name is not provided in string";
@@ -28,8 +41,8 @@ const exportedMethods = {
     const newInsertInformation = await adminCollection.insertOne(newAdmin);
     const newId = newInsertInformation.insertedId;
     return await this.getAdminById(newId);
-  },
-
+  }
+/*
   async getStoreById(id) {
     const adminCollection = await admin();
     const store = await adminCollection.findOne({ _id: id });
@@ -62,7 +75,7 @@ const exportedMethods = {
       throw `Could not delete Store with id of ${id}`;
     }
     console.log("Store deleted successfully ! ");
-  }
+  }*/
 };
 
 module.exports = exportedMethods;
