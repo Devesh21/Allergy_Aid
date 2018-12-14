@@ -82,6 +82,7 @@ module.exports={
     getProdById,
     addProd,
     searchProd,
+    filtersearchProd,
     addComment,
     dropProd
 }
