@@ -1,13 +1,6 @@
 const mongoCollections = require("../config/mongoCollections");
 const admin = mongoCollections.admin;
 const uuid = require("node-uuid");
-const bcrypt=require("bcrypt");
-const saltRounds = 16;
-
-function generateHashedPassword(password) {
-	return bcrypt.hashSync(password, 10);
-}
-
 
 const exportedMethods = {
 
