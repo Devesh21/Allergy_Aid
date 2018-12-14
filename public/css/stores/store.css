@@ -1,0 +1,38 @@
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 2px 2px;
+    cursor: pointer;
+  }
+
+  .button4 {border-radius: 12px;}
+
+  .stores
+{
+    margin: 50px;
+    padding: 20px 8px;
+    width: 50%;
+    align-content: right;
+    align-items: center;
+    color: aliceblue;
+}
+
+.label
+{
+    color: rgb(20, 64, 99);
+}
+
+body{
+    background-image: url(store.jpg);
+
+    }
+h1,h2{
+    text-align: center;
+    color:rgb(27, 52, 161);
+}
