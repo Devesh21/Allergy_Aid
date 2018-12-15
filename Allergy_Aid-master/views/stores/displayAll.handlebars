@@ -1,0 +1,8 @@
+ <link rel="stylesheet" href="/public/css/users/store.css">
+ <h1>Stores</h1>
+  {{#each stores}}  
+    <article class="stores">
+      <h2><a href="/stores/id/{{_id}}">{{storeName}}</a></h2>
+      <p>{{address}}</p>
+    </article>
+  {{/each}}

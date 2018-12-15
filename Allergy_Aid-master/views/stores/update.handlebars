@@ -1,0 +1,70 @@
+<!--h1>Update</h1>
+<div class="form-group">
+<form action="/stores/id" method="PATCH" id = "update-form">
+
+    <label>
+        Store Name
+        <input type="text" class="form-control" name="storeName" placeholder="Store Name" value="{{stores.storeName}}"/>
+    </label>
+    <label>
+        Store Address
+        <input type="text" class="form-control" name="address" placeholder="Store Address" value="{{stores.address}}"/>
+    </label>
+    <label>
+        Phone Number
+        <input type="text" class="form-control" name="phone" placeholder="Phone Number" value="{{stores.phone_no}}"/>
+    </label>
+    <label>
+        Email
+        <input type="text" class="form-control" name="email" placeholder="Email" value="{{stores.email}}"/>
+    </label>
+    <button type="submit">Update</button>
+
+</form>
+</div-->
+<link rel="stylesheet" href="/public/css/users/store.css">
+<h1>Update Store Information</h1>
+    
+    <div class="stores">
+    <form action="/stores/id" method="PATCH" id = "update-form">
+    
+    <div class="form-group">
+    <label>
+        Store Name
+        <input type="text" class="form-control" name="storeName" placeholder="Store Name" value="{{stores.storeName}}"/>
+    </label>
+    </div>
+
+    <div class="form-group">
+    <label>
+        Store Address
+        <input type="text" class="form-control" name="address" placeholder="Store Address" value="{{stores.address}}"/>
+    </label>
+    </div>
+
+    <div class="form-group">
+    <label>
+        Phone Number
+        <input type="text" class="form-control" name="phone" placeholder="Phone Number" value="{{stores.phone_no}}"/>
+    </label>
+    </div>
+
+    <div class="form-group">
+    <label>
+        Email
+        <input type="text" class="form-control" name="email" placeholder="Email" value="{{stores.email}}"/>
+    </label>
+    </div>
+    <button type="submit" class="button button4">Update</button>
+
+</form>
+</div>
+{{#if hasErrors}}
+<ul>
+    {{#each errors}}
+    <li>
+        {{this}}
+    </li>
+    {{/each}}
+</ul>
+{{/if}}

@@ -1,0 +1,10 @@
+  <link rel="stylesheet" href="/public/css/products/prod.css">
+  
+  <h1>Productions</h1>
+  {{#each prods}}  
+    <article class="prod">
+      <h2><a href="/prod/id/{{_id}}">{{Pname}}</a></h2>
+      <p>{{description}}</p>
+    </article>
+  {{/each}}
+

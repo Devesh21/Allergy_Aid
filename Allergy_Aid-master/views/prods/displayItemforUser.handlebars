@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="/public/css/products/prod.css">
+<div class="product">
+  <h1>{{ prod.Pname }}</h1>
+  <h2>Ingredients</h2>
+  <p>{{ prod.ingredients }}</p>
+  <h2>Description</h2>
+  <p>{{ prod.description }}</p>
+  
+  {{#if prod.feedback.length}}
+    <h3>feedback</h3>
+    <ul>
+      {{#each prod.feedback}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+<a href="/prod/addComment/{{prod._id}}">Add comment</a>

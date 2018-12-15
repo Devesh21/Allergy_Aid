@@ -1,0 +1,43 @@
+/* header */
+header { color: rgb(190, 146, 91); display: inline;min-height: 50px; }
+header a { color:rgb(131, 61, 4); font-size: 1.5rem;padding: 10px 0; }
+header i.fa { font-size: 1.8rem;margin-right:0rem }
+
+.search-container{
+    align-self: auto;
+}
+
+li {
+    display: inline;
+  }
+
+/* body */
+.center{
+    align-self: auto;
+    color: rgb(97, 7, 85)
+}
+
+h1{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+
+.success {
+    color: #28a745;
+}
+
+.error {
+    color: #dc3545;
+}
+
+/* footer */
+  .footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    color:rgb(226, 221, 221);
+    text-align: center;
+  }

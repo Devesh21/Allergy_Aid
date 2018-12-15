@@ -1,0 +1,30 @@
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 2px 2px;
+    cursor: pointer;
+  }
+
+  .button4 {border-radius: 12px;}
+
+  .product{
+    margin: 60px;
+    padding: 20px 8px;
+    width: 60%;
+    display: block;
+}
+
+body{
+background-image: url(/public/css/images/bg.jpg);
+background-repeat: no-repeat;
+background-position: right;
+background-attachment: fixed;
+
+}
+
