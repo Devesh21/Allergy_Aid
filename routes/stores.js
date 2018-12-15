@@ -29,10 +29,10 @@ router.get("/", async (req, res) => {
 
 
 /* GET: find store by id */
-router.get("/:id", async (req,res) => {
+router.get("/id/:id", async (req,res) => {
 	try {
 		const store = await storeData.getById(req.params.id);
-		res.json(store);
+		res.render("stores/Store",{stores:store});
 	} catch(e) {
 		res.status(404).json({message: " ID not found"});
 	}
@@ -49,7 +49,11 @@ router.get("/:name", async (req,res) => {
 */
 
 /* POST: add new store to db */
-router.post("/", async (req, res) => {
+router.get("/signup",async(req,res)=>{
+	res.render("stores/signup");
+})
+
+router.post("/signup", async (req, res) => {
 	// first check if the request body provide all the informations: storeName, address, phone_no,email 
 	const reqBody = req.body;
 	if(!reqBody.storeName || !reqBody.address || !reqBody.phone_no || !reqBody.email) {
@@ -60,7 +64,7 @@ router.post("/", async (req, res) => {
 	try{
 		const {storeName,address,phone_no,email} = reqBody;
 		const postStore = await storeData.addStore(storeName,address,phone_no,email);
-		res.json(postStore);
+		res.redirect(`/stores/id/${postStore._id}`);
 	}catch(e) {
 		res.status(500).json({message: " Create new Store failed"});
 	}
