@@ -1,6 +1,7 @@
 const mongoCollection = require("../config/mongoCollections");
 const users = mongoCollection.users;
 const uuid = require("uuid");
+const bcrypt = require("bcrypt");
 
 let exportedMethods = {
 
@@ -19,16 +20,30 @@ let exportedMethods = {
         return user;
     },
 
+<<<<<<< HEAD
     async addUser(fname, lname, email, password, address, mobile, allergy){
         const usersCollection = await users();
         console.log(allergy);
         
+=======
+    async hash(password)
+    {
+        let hp;
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(password, salt);
+        return hash;
+    },
+
+    async addUser(fname, lname, email, password, address, allergy){
+        const usersCollection = await users();
+        let hp = await this.hash(password); 
+>>>>>>> 3787cc48c8efa1da6ab01ed520b3c27b40954879
         const newUser = {
             _id: uuid.v4(),
             fname: fname,
             lName: lname,
             email: email,
-            password: password,
+            password: hp,
             address: address,
             mobile: mobile,
             allergy: allergy,
@@ -38,6 +53,19 @@ let exportedMethods = {
         let newUserId = await newAddedUser.insertedId;
         let addedUser = await this.getUserById(newUserId);
         return addedUser;
+    },
+
+    async verifyPassword(password,hashedpassword)
+    {
+
+        if(bcrypt.compareSync(password,hashedpassword))
+                {
+                  return true;
+                }
+                else
+                {
+                  return false;
+                }
     },
 
     async removeUser(id){

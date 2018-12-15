@@ -4,11 +4,6 @@ const uuid = require("node-uuid");
 const bcrypt=require("bcrypt");
 const saltRounds = 16;
 
-function generateHashedPassword(password) {
-	return bcrypt.hashSync(password, 10);
-}
-
-
 const exportedMethods = {
 
   async getAdminById(id) {
@@ -24,15 +19,24 @@ const exportedMethods = {
     const adminDetails = await adminCollection.find({}).toArray();
     return adminDetails;
 },
+
+async hash(password)
+    {
+        let hp;
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(password, salt);
+        return hash;
+    },
+
   async addAdmin(username, password, fName, lName) {
     if (typeof fName !== "string") throw "First name is not provided in string";
     if (typeof lName !== "string") throw "Last name is not provided in string";
 
     const adminCollection = await admin();
-
+    let hp = await this.hash(password); 
     const newAdmin = {
       username: username,
-      password: password,
+      password: hp,
       fName: fName,
       lName:lName,
       _id: uuid.v4()
@@ -41,7 +45,19 @@ const exportedMethods = {
     const newInsertInformation = await adminCollection.insertOne(newAdmin);
     const newId = newInsertInformation.insertedId;
     return await this.getAdminById(newId);
-  }
+  },
+  async verifyPassword(password,hashedpassword)
+    {
+
+        if(bcrypt.compareSync(password,hashedpassword))
+                {
+                  return true;
+                }
+                else
+                {
+                  return false;
+                }
+    }
 /*
   async getStoreById(id) {
     const adminCollection = await admin();
