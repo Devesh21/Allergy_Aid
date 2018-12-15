@@ -67,8 +67,8 @@ router.post("/signup", async (req, res) => {
 	}
 	/* try Add New store manager */
 	try{
-		const {storeName,address,phone_no,email} = reqBody;
-		const postStore = await storeData.addStore(storeName,address,phone_no,email);
+		const {storeName,address,phone_no,email,password} = reqBody;
+		const postStore = await storeData.addStore(storeName,address,phone_no,email,password);
 		res.redirect(`/stores/id/${postStore._id}`);
 	}catch(e) {
 		res.status(500).json({message: " Create new Store failed"});
@@ -105,6 +105,15 @@ router.patch("/:id", async(req,res) => {
 	}
 });
 
+router.post("/login", async (req, res) => {
+    let storeInfo = req.body;
+    try{
+        const user = await userData.getUserByEmail(storeInfo.email, storeInfo.password);
+        res.json(user);
+    }catch(err){
+        res.status(500).json({ error : err });
+    }
+})
 /* Delete: remove store from db */
 router.delete("/:id", async (req, res) => {
 	try {

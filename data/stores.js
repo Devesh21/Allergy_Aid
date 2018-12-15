@@ -1,6 +1,7 @@
 const mongoCollections = require("../config/mongoCollections"); //connect to collections
 const stores = mongoCollections.stores;	// get database
 const uuid = require("node-uuid");
+const bcrypt = require("bcrypt");
 
 let exportedMethods = {
 	/* getAllStore: get all stores informations */
@@ -20,14 +21,37 @@ let exportedMethods = {
 			});
 		});
 	},
+	async getStoreByEmail(email, password){
+        const StoresCollection = await stores();
+        const store = StoresCollection.findOne({ email : email});
+        if(!store){
+            throw "Store not found";
+        }
+
+        if(bcrypt.compareSync(password, store.password)){
+            return store;
+        }
+        else{
+            throw "Invalid Email ID or Password";
+        }
+    },
 	/* addStore: add new store manager */
-	addStore(storeName,address,phone_no,email) {
-		return stores().then(storeCollection => {
+	async hash(password)
+    {
+        let hp;
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(password, salt);
+        return hash;
+    },
+	async addStore(storeName,address,phone_no,email,password) {
+		return stores().then(async storeCollection => {
+			let hp = await this.hash(password); 
 			let newStore = {
 				storeName: storeName,
 				address: address,
 				phone_no: phone_no,
 				email: email,
+				password:hp,
 				_id: uuid.v4()
 			};
 			return storeCollection.insertOne(newStore).then(newInsertedStore => {
