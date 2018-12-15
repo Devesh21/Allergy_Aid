@@ -20,6 +20,15 @@ let exportedMethods = {
         return user;
     },
 
+    async getUserByEmail(email){
+        const usersCollection = await users();
+        const user = usersCollection.findOne({ email : email});
+        if(!user){
+            throw "User not found";
+        }
+        return user;
+    },
+
     async hash(password)
     {
         let hp;
@@ -28,7 +37,7 @@ let exportedMethods = {
         return hash;
     },
 
-    async addUser(fname, lname, email, password, address, allergy){
+    async addUser(fname, lname, email, password, address, mobile, allergy){
         const usersCollection = await users();
         let hp = await this.hash(password); 
         const newUser = {
@@ -45,12 +54,12 @@ let exportedMethods = {
         const newAddedUser = await usersCollection.insertOne(newUser);
         let newUserId = await newAddedUser.insertedId;
         let addedUser = await this.getUserById(newUserId);
+        delete addedUser.password;
         return addedUser;
     },
 
     async verifyPassword(password,hashedpassword)
     {
-
         if(bcrypt.compareSync(password,hashedpassword))
                 {
                   return true;

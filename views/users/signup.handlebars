@@ -1,29 +1,6 @@
 <main>
     <link rel="stylesheet" href="/public/css/users/users.css">
-    <!--div>
-        <form action="/users" method="post" id="signup-form">
-            <label>First Name:</label>
-            <input type="text" name="fname">
-            <br>
-            <label>Last Name:</label>
-            <input type="text" name="lname">
-            <br>
-            <label>Email:</label>
-            <input type="email" name="email">
-            <br>
-            <label>Password:</label>
-            <input type="password" name="password">
-            <br>
-            <label>Address:</label>
-            <input type="text" name="address">
-            <br>
-            <label>Allergies:</label>
-            <input type="text" name="allergy">
-            <br>
-            <p>{{errors}}</p>
-            <input type="submit"  id="b1">
-        </form>
-    </div-->
+    
     <div class="register">
 
         <form class= "form-horizontal" action="/users" method="post" id="login-form">
@@ -60,6 +37,13 @@
             <label class="control-label col-xs-2">Address:</label>
             <div class="col-xs-10">
             <input type="text" name="address" class="form-control" placeholder="Address">
+            </div>
+            </div>
+
+            <div class="form-group">
+            <label class="control-label col-xs-2">Mobile Number:</label>
+            <div class="col-xs-10">
+            <input type="number" name="mobile" class="form-control" placeholder="Mobile Number">
             </div>
             </div>
 

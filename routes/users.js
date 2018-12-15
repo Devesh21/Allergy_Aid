@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const data = require("../data");
 const userData = data.users;
+const cookies = require('cookie-parser');
 
 router.get("/:id", async (req, res) => {
     try {
@@ -23,6 +24,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
     let userInfo = req.body;
+    
     try{
         var allergyList = userInfo.allergy;
         
@@ -34,7 +36,13 @@ router.post("/", async (req, res) => {
         const addedUser = await userData.addUser(userInfo.fname, 
             userInfo.lname, userInfo.email, userInfo.password, 
             userInfo.address, userInfo.mobile, allergyListArr);
-        res.json(addedUser);
+        
+        //after signup cookie
+        res.cookie("AuthCookie", {addedUser});
+        //console.log(JSON.parse(req.cookies.AuthCookie));
+        
+        //res.json(addedUser);
+        res.redirect('/');
     }catch(err){
         res.status(500).json({ error: err });
     }
@@ -71,7 +79,7 @@ router.put("/:id", async (req, res) => {
     } catch (e) {
         res.status(500).json({ error: e });
     }
-    });
+});
 
 
 module.exports = router;
