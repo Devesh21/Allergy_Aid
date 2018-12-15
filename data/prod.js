@@ -49,7 +49,9 @@ const filtersearchProd=async function filtersearchProd(Pname,UserInfo){
     prod.forEach(element=> {
         allergy.forEach(innerelement=>{
             if(element.ingredients.split(",").includes(innerelement)){
-                index.push(prod.indexOf(element));
+                if(!index.includes(prod.indexOf(element))){
+                    index.push(prod.indexOf(element));
+                }
             }
         })
     });
