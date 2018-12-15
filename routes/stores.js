@@ -54,10 +54,6 @@ router.get("/:name", async (req,res) => {
 */
 
 /* POST: add new store to db */
-router.get("/signup",async(req,res)=>{
-	res.render("stores/signup");
-})
-
 router.post("/signup", async (req, res) => {
 	// first check if the request body provide all the informations: storeName, address, phone_no,email 
 	const reqBody = req.body;
