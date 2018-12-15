@@ -2,6 +2,7 @@ const express=require("express");
 const router=express.Router();
 const data=require("../data");
 const prodData=data.prod;
+const storeData=data.stores;
 
 
 const getAll=async function getAll(req,res) {
@@ -12,7 +13,8 @@ router.get("/",getAll);
 
 const getById=async function getById(req,res){
         const prod=await prodData.getProdById(req.params.id);
-        res.render("prods/displayItemforUser",{prod:prod});
+        const store=await storeData.getById(prod.S_id);
+        res.render("prods/displayItemforUser",{prod:prod,store:store});
 }
 router.get("/id/:id",getById);
 
