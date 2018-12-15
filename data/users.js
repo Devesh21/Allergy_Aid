@@ -1,7 +1,7 @@
 const mongoCollection = require("../config/mongoCollections");
 const users = mongoCollection.users;
 const uuid = require("uuid");
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 
 let exportedMethods = {
 
@@ -22,19 +22,17 @@ let exportedMethods = {
 
     async getUserByEmail(email, password){
         const usersCollection = await users();
-        const user = usersCollection.findOne({ email : email});
+        const user =await usersCollection.findOne({ email : email});
         if(!user){
             throw "User not found";
         }
-
-        if(bcrypt.compareSync(password, user.password)){
+        if(await bcrypt.compare(password, user.password)){
             return user;
         }
         else{
             throw "Invalid Email ID or Password";
         }
-
-//        return user;
+        
     },
 
     async hash(password)
@@ -65,19 +63,6 @@ let exportedMethods = {
         delete addedUser.password;
         return addedUser;
     },
-
-    async verifyPassword(password,hashedpassword)
-    {
-        if(bcrypt.compareSync(password,hashedpassword))
-                {
-                  return true;
-                }
-                else
-                {
-                  return false;
-                }
-    },
-
     async removeUser(id){
         const usersCollection = await users();
         const userInfo = usersCollection.findOne({_id : id});

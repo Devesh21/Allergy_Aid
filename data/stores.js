@@ -24,16 +24,17 @@ let exportedMethods = {
 	async getStoreByEmail(email, password){
         const StoresCollection = await stores();
         const store = StoresCollection.findOne({ email : email});
-        if(!store){
-            throw "Store not found";
-        }
+        // if(!store){
+        //     throw "Store not found";
+        // }
 
-        if(bcrypt.compareSync(password, store.password)){
-            return store;
-        }
-        else{
-            throw "Invalid Email ID or Password";
-        }
+        // if(bcrypt.compareSync(password, store.password)){
+        //     return store;
+        // }
+        // else{
+        //     throw "Invalid Email ID or Password";
+		// }
+		return store;
     },
 	/* addStore: add new store manager */
 	async hash(password)

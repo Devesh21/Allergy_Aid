@@ -43,17 +43,6 @@ router.get("/id/:id", async (req,res) => {
 	}
 });
 
-/* ?  do we need GET store by store name ? 
-router.get("/:name", async (req,res) => {
-	try{
-
-	} catch(e) {
-
-	}
-});
-*/
-
-/* POST: add new store to db */
 router.post("/signup", async (req, res) => {
 	// first check if the request body provide all the informations: storeName, address, phone_no,email 
 	const reqBody = req.body;

@@ -23,13 +23,15 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-    let userInfo = req.body;
+    let loginUsername=req.body["email"];
+    let loginPassword=req.body["password"];
     try{
-        const user = await userData.getUserByEmail(req.params.email, req.params.password);
+        const user = await userData.getUserByEmail(loginUsername,loginPassword);
         res.json(user);
     }catch(err){
         res.status(500).json({ error : err });
     }
+
 })
 
 router.post("/", async (req, res) => {
