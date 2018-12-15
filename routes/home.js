@@ -9,7 +9,7 @@ router.get('/index/about', (req, res) => {
     res.render('index/about');
 });
 
-router.get('/users/signup', (req,res) => {
+router.get('/user/signup', (req,res) => {
     res.render('users/signup');
 });
 
