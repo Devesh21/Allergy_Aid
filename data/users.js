@@ -20,12 +20,6 @@ let exportedMethods = {
         return user;
     },
 
-<<<<<<< HEAD
-    async addUser(fname, lname, email, password, address, mobile, allergy){
-        const usersCollection = await users();
-        console.log(allergy);
-        
-=======
     async hash(password)
     {
         let hp;
@@ -37,7 +31,6 @@ let exportedMethods = {
     async addUser(fname, lname, email, password, address, allergy){
         const usersCollection = await users();
         let hp = await this.hash(password); 
->>>>>>> 3787cc48c8efa1da6ab01ed520b3c27b40954879
         const newUser = {
             _id: uuid.v4(),
             fname: fname,
