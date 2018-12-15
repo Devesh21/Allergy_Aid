@@ -3,6 +3,9 @@
   <h1>{{ prod.Pname }}</h1>
   <h2>Ingredients</h2>
   <p>{{ prod.ingredients }}</p>
+  <h2>Description</h2>
+  <p>{{ prod.description }}</p>
+  
   {{#if prod.feedback.length}}
     <h3>feedback</h3>
     <ul>
@@ -11,7 +14,4 @@
       {{/each}}
     </ul>
   {{/if}}
-
-<form action="/prod/delete/{{prod._id}}" method="POST">
-    <button type="submit" class="button button4">Drop!</button>
-  </form>
+<a href="/prod/addComment/{{prod._id}}">Add comment</a>

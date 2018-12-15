@@ -16,9 +16,15 @@ const getProdById=async function getProdById(id){
     return prod;
 }
 
+const getProdByStoreId=async function getProdByStoreId(StoreId){
+    const prodCollection=await prods();
+    const prod=await prodCollection.find({S_id:StoreId}).toArray();
+    if(!prod) prod={Pname:"There is no items in this store."};
+    return prod;
+}
+
 const addProd=async function addProd(Pname,S_id,ingredients,description){
     if(typeof Pname!=="string") throw "No name provided";
-    if(typeof S_id!=="string") throw "No store Id provided";
     if(typeof ingredients!=="string") throw "No ingredient provided";
     if(typeof description!=="string") throw "No description provided";
     const comment=[];
@@ -84,6 +90,7 @@ module.exports={
     getProdById,
     addProd,
     searchProd,
+    getProdByStoreId,
     filtersearchProd,
     addComment,
     dropProd

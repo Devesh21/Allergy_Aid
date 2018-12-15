@@ -12,24 +12,29 @@ router.get("/",getAll);
 
 const getById=async function getById(req,res){
         const prod=await prodData.getProdById(req.params.id);
-        res.render("prods/displayItem",{prod:prod});
+        res.render("prods/displayItemforUser",{prod:prod});
 }
 router.get("/id/:id",getById);
 
+const getByIdStoreVersion=async function getByIdStoreVersion(req,res){
+    const prod=await prodData.getProdById(req.params.id);
+    res.render("prods/displayItem",{prod:prod});
+}
+router.get("/id/storeverison/:id",getByIdStoreVersion);
+
 //addProd
 const getAdd=function getAdd(req,res){
-    res.render("prods/addItem");
+    res.render("prods/addItem",{
+        storeId:req.params.id
+    });
 }
-router.get("/addItem",getAdd);
+router.get("/addItem/:id",getAdd);
 
 const postProd=async function postProd(req,res){
     let postData=req.body;
     let errors=[];
     if (!postData.Pname) {
         errors.push("No Pname provided");
-    }
-    if (!postData.S_id) {
-        errors.push("No S_id provided");
     }
     if (!postData.ingredients) {
         errors.push("No ingredients provided");
@@ -48,16 +53,16 @@ const postProd=async function postProd(req,res){
     try {
         const newProd = await prodData.addProd(
             postData.Pname,
-            postData.S_id,
+            req.params.id,
             postData.ingredients,
             postData.description
         );
-        res.redirect(`/prod/id/${newProd._id}`);
+        res.redirect(`/stores/id/${req.params.id}`);
       } catch (e) {
         res.status(500).json({ error: e });
       }
 }
-router.post("/addItem",postProd);
+router.post("/addItem/:id",postProd);
 //end addProd
 
 //searchProd
@@ -137,16 +142,17 @@ const dropProd=async function dropProd(req,res){
     try{
         await prodData.getProdById(req.params.id);
     }catch(e){
-        req.status(404).json({error:e});
+        res.status(404).json({error:e});
     }
     try{
+        const tem=await prodData.getProdById(req.params.id);
+        const storeid=tem.S_id;
         await prodData.dropProd(req.params.id);
-        const prodList=await prodData.getAllProds();
-        res.render("prods/displayAll",{prods:prodList});
+        res.redirect(`/stores/id/${storeid}`);
     }catch(e){
         res.status(500).json({error:e});
     }
 }
-router.delete("/id/:id",dropProd);
+router.post("/delete/:id",dropProd);
 
 module.exports=router;

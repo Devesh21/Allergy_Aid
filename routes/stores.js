@@ -14,6 +14,7 @@ const express = require("express");
 const router = express.Router();
 const data = require("../data") //  require data folder 
 const storeData = data.stores // suppose we have stores.js file in data folder
+const prodData=data.prod
 
 /* GET: get all stores detail */
 router.get("/", async (req, res) => {
@@ -32,7 +33,11 @@ router.get("/", async (req, res) => {
 router.get("/id/:id", async (req,res) => {
 	try {
 		const store = await storeData.getById(req.params.id);
-		res.render("stores/Store",{stores:store});
+		const storeProd=await prodData.getProdByStoreId(req.params.id);
+		res.render("stores/Store",{
+			stores:store,
+			storeProds:storeProd
+		});
 	} catch(e) {
 		res.status(404).json({message: " ID not found"});
 	}

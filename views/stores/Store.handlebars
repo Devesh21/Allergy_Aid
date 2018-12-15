@@ -7,4 +7,11 @@
   <h2>Email</h2>
   <p>{{stores.email}}</p>
 
+  <a href="/prod/addItem/{{stores._id}}">Add Item</a>
+   <h1>Items</h1>
+  {{#each storeProds}}  
+      <h2><a href="/prod/id/storeverison/{{_id}}">{{Pname}}</a></h2>
+      <p>{{feedback}}</p>
+  {{/each}}
+
   
