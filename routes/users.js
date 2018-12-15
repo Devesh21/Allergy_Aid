@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
     try{
         const addedUser = await userData.addUser(userInfo.fname, 
             userInfo.lname, userInfo.email, userInfo.password, 
-            userInfo.address, userInfo.allergy);
+            userInfo.address, userInfo.mobile, userInfo.allergy);
         res.json(addedUser);
     }catch(err){
         res.status(500).json({ error: err });
