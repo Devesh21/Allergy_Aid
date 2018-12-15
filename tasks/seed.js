@@ -8,7 +8,7 @@ const admin = data.admin;
 const main = async() => {
 	const db = await dbConnection();
 	await db.dropDatabase();
-	const firstStore = await stores.addStore (
+  await stores.addStore (
 	  "Stevens' store",
     "Hoboken",
     "701-231-2321",
