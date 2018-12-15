@@ -19,8 +19,10 @@ let exportedMethods = {
         return user;
     },
 
-    async addUser(fname, lname, email, password, address, allergy){
+    async addUser(fname, lname, email, password, address, mobile, allergy){
         const usersCollection = await users();
+        console.log(allergy);
+        
         const newUser = {
             _id: uuid.v4(),
             fname: fname,
@@ -28,6 +30,7 @@ let exportedMethods = {
             email: email,
             password: password,
             address: address,
+            mobile: mobile,
             allergy: allergy,
             cart: []
         };

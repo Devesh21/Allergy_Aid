@@ -24,9 +24,16 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
     let userInfo = req.body;
     try{
+        var allergyList = userInfo.allergy;
+        
+        allergyListArr = allergyList.split(",");
+        for(var i in allergyListArr){
+            allergyListArr[i] = allergyListArr[i].trim();
+        }
+        
         const addedUser = await userData.addUser(userInfo.fname, 
             userInfo.lname, userInfo.email, userInfo.password, 
-            userInfo.address, userInfo.mobile, userInfo.allergy);
+            userInfo.address, userInfo.mobile, allergyListArr);
         res.json(addedUser);
     }catch(err){
         res.status(500).json({ error: err });
@@ -47,22 +54,24 @@ router.delete("/:id", async (req,res) => {
     }catch(err){
         res.status(404).json({ error: err});
     };
-    /* Updated part */
-    router.put("/:id", async (req, res) => {
-        const updatedData = req.body;
-        try {
-          await userData.getUserById(req.params.id);
-        } catch (e) {
-          res.status(404).json({ error: "User not found" });
-        }
-      
-        try {
-          const updatedUser = await userData.updateUser(req.params.id, updatedData);
-          res.json(updatedUser);
-        } catch (e) {
-          res.status(500).json({ error: e });
-        }
-      });
 });
+
+/* Updated part */
+router.put("/:id", async (req, res) => {
+    const updatedData = req.body;
+    try {
+        await userData.getUserById(req.params.id);
+    } catch (e) {
+        res.status(404).json({ error: "User not found" });
+    }
+    
+    try {
+        const updatedUser = await userData.updateUser(req.params.id, updatedData);
+        res.json(updatedUser);
+    } catch (e) {
+        res.status(500).json({ error: e });
+    }
+    });
+
 
 module.exports = router;
