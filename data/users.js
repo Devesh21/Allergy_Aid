@@ -20,13 +20,21 @@ let exportedMethods = {
         return user;
     },
 
-    async getUserByEmail(email){
+    async getUserByEmail(email, password){
         const usersCollection = await users();
         const user = usersCollection.findOne({ email : email});
         if(!user){
             throw "User not found";
         }
-        return user;
+
+        if(bcrypt.compareSync(password, user.password)){
+            return user;
+        }
+        else{
+            throw "Invalid Email ID or Password";
+        }
+
+//        return user;
     },
 
     async hash(password)
