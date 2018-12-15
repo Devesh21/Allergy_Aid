@@ -9,5 +9,12 @@ router.get('/index/about', (req, res) => {
     res.render('index/about');
 });
 
+router.get('/index/Usersignup', (req,res) => {
+    res.render('users/signup');
+});
+
+router.get('/index/login', (req,res) => {
+    res.render('users/login');
+});
 
 module.exports = router;
