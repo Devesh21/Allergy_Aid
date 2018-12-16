@@ -92,7 +92,8 @@ let exportedMethods = {
         }
 
         if (updatedUser.password) {
-            updatedUserData.password = updatedUser.password;
+            let hp = await this.hash(updatedUser.password); 
+            updatedUserData.password =hp;
         }
     
         if (updatedUser.address) {
@@ -104,7 +105,7 @@ let exportedMethods = {
         }
     
         let updateCommand = {
-          $set: updatedPostData
+          $set: updatedUserData
         };
         const query = {
           _id: id

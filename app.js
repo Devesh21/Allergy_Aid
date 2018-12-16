@@ -35,7 +35,7 @@ const getsearchfilter=function getsearchfilter(req,res){
 app.get("/prod/searchfilter",userCheckCookie,getsearchfilter);
 
 const filtersearchProd=async function filtersearchProd(req,res){
-    const allergy=await req.cookies.AuthCookie.user.allergy;
+    const allergy=await req.cookies.AuthCookie.user.allergy.split(",");
     try{
         const prod=await prodData.filtersearchProd(req.params.Pname,allergy);
         if(prod.length==0){
