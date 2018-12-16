@@ -68,7 +68,7 @@ router.post("/", async (req, res) => {
                         const addedUser = await userData.addUser(userInfo.fname, 
                             userInfo.lname, userInfo.email, userInfo.password, 
                             userInfo.address, userInfo.mobile, allergyListArr);
-                    req.flash('success_msg', 'You are registered and can now login');
+        req.flash('success_msg', 'You are registered and can now login');
         //after signup cookie
         res.cookie("AuthCookie", {addedUser});
         //console.log(JSON.parse(req.cookies.AuthCookie));
