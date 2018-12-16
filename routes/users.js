@@ -66,12 +66,12 @@ router.post("/", async (req, res) => {
                     allergyListArr[i] = allergyListArr[i].trim();
                 }
                 
-                const addedUser = await userData.addUser(userInfo.fname, 
+                const user = await userData.addUser(userInfo.fname, 
                     userInfo.lname, userInfo.email, userInfo.password, 
                     userInfo.address, userInfo.mobile, allergyListArr);
         req.flash('success_msg', 'You are registered and can now login');
         //after signup cookie
-        res.cookie("AuthCookie", {addedUser});
+        res.cookie("AuthCookie", {user});
         //console.log(JSON.parse(req.cookies.AuthCookie));
         
         //res.json(addedUser);

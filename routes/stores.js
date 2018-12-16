@@ -1,15 +1,3 @@
-/* Store route
-	Store {
-		“_id”: ”7b7997a2-c0d2-4f8c-b27a-6a1d4b5b6310”,
-		“storeName”: “C.H.Martins”,
-		“address”: “21 Central Ave, Jerser City, NJ 07307”,
-		“phone_no”: “2014462345”,
-		“email”: “chmartin@gmail.com”,
-		“password”: “$2a$08$XdvNkfdNIL8Fq7l8FgK0M0iV5HOskfVn7.PWcShU.O”
-	}
-		
-*/
-
 const express = require("express");
 const router = express.Router();
 const data = require("../data") //  require data folder 
@@ -109,13 +97,14 @@ router.patch("/:id", async(req,res) => {
 });
 
 router.post("/login", async (req, res) => {
-    let storeInfo = req.body;
+    let loginUsername=req.body["email"];
+    let loginPassword=req.body["password"];
     try{
-        const user = await userData.getUserByEmail(storeInfo.email, storeInfo.password);
-        res.json(user);
+        const store = await storeData.getStoreByEmail(loginUsername, loginPassword);
+        res.redirect(`/stores/id/${store._id}`)
     }catch(err){
         res.status(500).json({ error : err });
-    }
+	}
 })
 /* Delete: remove store from db */
 router.delete("/:id", async (req, res) => {
