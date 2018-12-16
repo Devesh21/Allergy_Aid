@@ -59,16 +59,16 @@ router.post("/", async (req, res) => {
         } 
         else {
             try{
-                        var allergyList = userInfo.allergy;
-                        
-                        allergyListArr = allergyList.split(",");
-                        for(var i in allergyListArr){
-                            allergyListArr[i] = allergyListArr[i].trim();
-                        }
-                        
-                        const addedUser = await userData.addUser(userInfo.fname, 
-                            userInfo.lname, userInfo.email, userInfo.password, 
-                            userInfo.address, userInfo.mobile, allergyListArr);
+                var allergyList = userInfo.allergy;
+                
+                allergyListArr = allergyList.split(",");
+                for(var i in allergyListArr){
+                    allergyListArr[i] = allergyListArr[i].trim();
+                }
+                
+                const addedUser = await userData.addUser(userInfo.fname, 
+                    userInfo.lname, userInfo.email, userInfo.password, 
+                    userInfo.address, userInfo.mobile, allergyListArr);
         req.flash('success_msg', 'You are registered and can now login');
         //after signup cookie
         res.cookie("AuthCookie", {addedUser});
