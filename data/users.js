@@ -79,28 +79,28 @@ let exportedMethods = {
     
         const updatedUserData = {};
     
-        if (updatedUser.fname) {
+        if (!updatedUser.fname=="") {
             updatedUserData.fname = updatedUser.fname;
         }
     
-        if (updatedUser.lName) {
+        if (!updatedUser.lName=="") {
             updatedUserData.lName = updatedUser.lName;
         }
     
-        if (updatedUser.email) {
+        if (!updatedUser.email=="") {
             updatedUserData.email = updatedUser.email;
         }
 
-        if (updatedUser.password) {
+        if (!updatedUser.password=="") {
             let hp = await this.hash(updatedUser.password); 
             updatedUserData.password =hp;
         }
     
-        if (updatedUser.address) {
+        if (!updatedUser.address=="") {
             updatedUserData.address = updatedUser.address;
         }
     
-        if (updatedUser.allergy) {
+        if (!updatedUser.allergy=="") {
             updatedUserData.allergy = updatedUser.allergy;
         }
     
