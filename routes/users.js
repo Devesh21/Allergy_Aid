@@ -36,117 +36,49 @@ router.post("/login", async (req, res) => {
 
 })
 
-// router.post("/", async (req, res) => {
-//     let userInfo = req.body;
+router.post("/", async (req, res) => {
+    let userInfo = req.body;
+
+    	// Validation
+        req.checkBody('fname', 'First Name is required').notEmpty();
+        req.checkBody('lname', 'Last Name is required').notEmpty();
+    	req.checkBody('email', 'Email is required').notEmpty();
+    	req.checkBody('email', 'Email is not valid').isEmail();
+    	req.checkBody('password', 'Password is required').notEmpty();
+        req.checkBody('address', 'Address is required').notEmpty();
+        req.checkBody('mobile', 'mobile is required').notEmpty();
+        req.checkBody('mobile','mobile is not valid').isMobilePhone();
     
-//     try{
-//         var allergyList = userInfo.allergy;
-        
-//         allergyListArr = allergyList.split(",");
-//         for(var i in allergyListArr){
-//             allergyListArr[i] = allergyListArr[i].trim();
-//         }
-        
-//         const addedUser = await userData.addUser(userInfo.fname, 
-//             userInfo.lname, userInfo.email, userInfo.password, 
-//             userInfo.address, userInfo.mobile, allergyListArr);
-        
-//         //after signup cookie
-//         res.cookie("AuthCookie", {addedUser});
-//         //console.log(JSON.parse(req.cookies.AuthCookie));
-        
-//         //res.json(addedUser);
-//         res.redirect('/');
-//     }catch(err){
-//         res.status(500).json({ error: err });
-//     }
-// });
-
-// Register User
-router.post('/', function(req, res){
-    var fname = req.body.fname;
-    var lname = req.body.lname;
-	var email = req.body.email;
-	var password = req.body.password;
-    var address = req.body.address;
-    var mobile = req.body.mobile;
-    var allergy=req.body.allergy;
-
-	// Validation
-    req.checkBody('fname', 'First Name is required').notEmpty();
-    req.checkBody('lname', 'Last Name is required').notEmpty();
-	req.checkBody('email', 'Email is required').notEmpty();
-	req.checkBody('email', 'Email is not valid').isEmail();
-	req.checkBody('password', 'Password is required').notEmpty();
-    req.checkBody('address', 'Address is required').notEmpty();
-    req.checkBody('contactNumber', 'Contact Number is required').notEmpty();
-
-    var errors = req.validationErrors();
+        var errors = req.validationErrors();
     
-    var allergyList = allergy.allergy;
+    	if(errors){
+    		res.render('users/signup',{
+    			errors:errors
+    		});
+        } 
+        else {
+            try{
+                        var allergyList = userInfo.allergy;
+                        
+                        allergyListArr = allergyList.split(",");
+                        for(var i in allergyListArr){
+                            allergyListArr[i] = allergyListArr[i].trim();
+                        }
+                        
+                        const addedUser = await userData.addUser(userInfo.fname, 
+                            userInfo.lname, userInfo.email, userInfo.password, 
+                            userInfo.address, userInfo.mobile, allergyListArr);
+                    req.flash('success_msg', 'You are registered and can now login');
+        //after signup cookie
+        res.cookie("AuthCookie", {addedUser});
+        //console.log(JSON.parse(req.cookies.AuthCookie));
         
-        allergyListArr = allergyList.split(",");
-         for(var i in allergyListArr){
-            allergyListArr[i] = allergyListArr[i].trim();
-
-
-	if(errors){
-		res.render('users/signup',{
-			errors:errors
-		});
-    } 
-    else {
-		var newUser = new userData({
-            fname: fname,
-            lname: lname,
-			email:email,
-            password: password,
-            address: address,
-            mobile: mobile,
-            allergyListArr
-		});
-
-		userData.addUser(newUser, function(err, user){
-			if(err) throw err;
-        });
-
-		req.flash('success_msg', 'You are registered and can now login');
-
-		res.redirect('/users/login');
-	}
+        //res.json(addedUser);
+        res.redirect('/');
+    }catch(err){
+        res.status(500).json({ error: err });
+    }
 }});
-
-passport.use(new LocalStrategy(
-  function(email, password, done) {
-   User.getUserByEmail(email, function(err, user){
-   	if(err) throw err;
-   	if(!user){
-   		return done(null, false, {message: 'Unknown User'});
-   	}
-
-   	userData.comparePassword(password, userData.password, function(err, isMatch){
-   		if(err) throw err;
-   		if(isMatch){
-   			return done(null, user);
-   		} else {
-   			return done(null, false, {message: 'Invalid password'});
-   		}
-   	});
-   });
-  }));
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.getUserById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
-//////
-
 
 router.delete("/:id", async (req,res) => {
     try{
