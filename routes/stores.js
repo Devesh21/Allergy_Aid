@@ -19,7 +19,7 @@ const prodData=data.prod
 /* GET: get all stores detail */
 router.get("/", async (req, res) => {
 	try {
-		const allStores = await storeData.getAllStores();
+		const allStores = await storeData.getAllStore();
 		res.render("stores/displayAll", {
 			stores: allStores
 		});
@@ -46,10 +46,28 @@ router.get("/id/:id", async (req,res) => {
 router.post("/signup", async (req, res) => {
 	// first check if the request body provide all the informations: storeName, address, phone_no,email 
 	const reqBody = req.body;
-	if(!reqBody.storeName || !reqBody.address || !reqBody.phone_no || !reqBody.email) {
-		res.status(400).json({message: "Please Provid all the informaions"});
-		return;
-	}
+	// if(!reqBody.storeName || !reqBody.address || !reqBody.phone_no || !reqBody.email) {
+	// 	res.status(400).json({message: "Please Provide all the informaions"});
+	// 	return;
+	// }
+	// Validation
+	req.checkBody('storeName', 'Store Name is required').notEmpty();
+	req.checkBody('email', 'Email is required').notEmpty();
+	req.checkBody('email', 'Email is not valid').isEmail();
+	req.checkBody('password', 'Password is required').notEmpty();
+	req.checkBody('address', 'Address is required').notEmpty();
+	req.checkBody('phone_no', 'phone_no is required').notEmpty();
+	req.checkBody('phone_no','phone_no is not valid').isMobilePhone();
+
+	var errors = req.validationErrors();
+
+	if(errors){
+		res.render('stores/signup',{
+			errors:errors
+		});
+	} 
+	else {
+	
 	/* try Add New store manager */
 	try{
 		const {storeName,address,phone_no,email,password} = reqBody;
@@ -58,7 +76,7 @@ router.post("/signup", async (req, res) => {
 	}catch(e) {
 		res.status(500).json({message: " Create new Store failed"});
 	}
-});
+}});
 
 /* PATCH: Updates the specified with only the supplied changes */
 router.patch("/:id", async(req,res) => {

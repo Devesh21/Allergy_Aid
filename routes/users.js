@@ -3,11 +3,13 @@ const router = express.Router();
 const data = require("../data");
 const userData = data.users;
 const cookies = require('cookie-parser');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 router.get("/:id", async (req, res) => {
     try {
         const user = await userData.getUserById(req.params.id);
-        res.json(user);
+        res.render("users/dashboard",{user:user});
     } catch (e) {
         res.status(404).json({ message: "not found!" });
     }
@@ -27,7 +29,8 @@ router.post("/login", async (req, res) => {
     let loginPassword=req.body["password"];
     try{
         const user = await userData.getUserByEmail(loginUsername,loginPassword);
-        res.json(user);
+        res.cookie("AuthCookie", {user});
+        res.redirect(`/users/${user._id}`)
     }catch(err){
         res.status(500).json({ error : err });
     }
@@ -36,19 +39,37 @@ router.post("/login", async (req, res) => {
 
 router.post("/", async (req, res) => {
     let userInfo = req.body;
+
+    	// Validation
+        req.checkBody('fname', 'First Name is required').notEmpty();
+        req.checkBody('lname', 'Last Name is required').notEmpty();
+    	req.checkBody('email', 'Email is required').notEmpty();
+    	req.checkBody('email', 'Email is not valid').isEmail();
+    	req.checkBody('password', 'Password is required').notEmpty();
+        req.checkBody('address', 'Address is required').notEmpty();
+        req.checkBody('mobile', 'mobile is required').notEmpty();
+        req.checkBody('mobile','mobile is not valid').isMobilePhone();
     
-    try{
-        var allergyList = userInfo.allergy;
-        
-        allergyListArr = allergyList.split(",");
-        for(var i in allergyListArr){
-            allergyListArr[i] = allergyListArr[i].trim();
-        }
-        
-        const addedUser = await userData.addUser(userInfo.fname, 
-            userInfo.lname, userInfo.email, userInfo.password, 
-            userInfo.address, userInfo.mobile, allergyListArr);
-        
+        var errors = req.validationErrors();
+    
+    	if(errors){
+    		res.render('users/signup',{
+    			errors:errors
+    		});
+        } 
+        else {
+            try{
+                        var allergyList = userInfo.allergy;
+                        
+                        allergyListArr = allergyList.split(",");
+                        for(var i in allergyListArr){
+                            allergyListArr[i] = allergyListArr[i].trim();
+                        }
+                        
+                        const addedUser = await userData.addUser(userInfo.fname, 
+                            userInfo.lname, userInfo.email, userInfo.password, 
+                            userInfo.address, userInfo.mobile, allergyListArr);
+        req.flash('success_msg', 'You are registered and can now login');
         //after signup cookie
         res.cookie("AuthCookie", {addedUser});
         //console.log(JSON.parse(req.cookies.AuthCookie));
@@ -58,7 +79,7 @@ router.post("/", async (req, res) => {
     }catch(err){
         res.status(500).json({ error: err });
     }
-});
+}});
 
 router.delete("/:id", async (req,res) => {
     try{
@@ -77,7 +98,11 @@ router.delete("/:id", async (req,res) => {
 });
 
 /* Updated part */
-router.put("/:id", async (req, res) => {
+router.get("/update/:id",async(req,res)=>{
+    const id=req.params.id;
+    res.render("users/updateProfile",{id:id});
+})
+router.post("/update/:id", async (req, res) => {
     const updatedData = req.body;
     try {
         await userData.getUserById(req.params.id);
@@ -87,10 +112,12 @@ router.put("/:id", async (req, res) => {
     
     try {
         const updatedUser = await userData.updateUser(req.params.id, updatedData);
-        res.json(updatedUser);
+        // res.redirect(`/users/${updatedUser._id}`)
+        res.json(updatedUser)
     } catch (e) {
         res.status(500).json({ error: e });
     }
+    // res.json(updatedData)
 });
 
 

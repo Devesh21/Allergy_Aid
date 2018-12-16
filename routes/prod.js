@@ -139,7 +139,6 @@ const addComment=async function addComment(req,res){
 }
 router.post("/addComment/:id",addComment);
 
-//deleteProd still wroking.
 const dropProd=async function dropProd(req,res){
     try{
         await prodData.getProdById(req.params.id);
