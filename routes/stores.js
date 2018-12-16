@@ -19,7 +19,7 @@ const prodData=data.prod
 /* GET: get all stores detail */
 router.get("/", async (req, res) => {
 	try {
-		const allStores = await storeData.getAllStores();
+		const allStores = await storeData.getAllStore();
 		res.render("stores/displayAll", {
 			stores: allStores
 		});
