@@ -47,10 +47,9 @@ const searchProd=async function searchProd(Pname){
     return prod;
 }
 
-const filtersearchProd=async function filtersearchProd(Pname,UserInfo){
+const filtersearchProd=async function filtersearchProd(Pname,allergy){
     const prodCollection=await prods();
-    const prod=await prodCollection.find({Pname:Pname}).toArray();
-    const allergy=UserInfo.allergy.split(",");
+    const prod=await prodCollection.find({Pname:eval("/"+Pname+"/i") }).toArray();
     const index=[];
     prod.forEach(element=> {
         allergy.forEach(innerelement=>{

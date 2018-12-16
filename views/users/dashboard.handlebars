@@ -1,4 +1,16 @@
 <link rel="stylesheet" href="/public/css/users/users.css">
+<<<<<<< HEAD
 <label> Edit Profile
 <button class="btn"><i class="fa fa-user-edit"></i></button>
 </label>
+=======
+<div class="users">
+  <h1>{{user.fname}} {{user.lName}}</h1>
+  <h2>E-mail</h2>
+  <p>{{ user.email }}</p>
+  <h2>Address</h2>
+  <p>{{ user.address }}</p>
+  <h2>Allergy</h2>
+  <p>{{ user.allergy }}</p>
+<a href="/users/update/{{user._id}}">Edit Profile </a>
+>>>>>>> c6c1b673d2d8bb7626d4451354ba99262459af1f

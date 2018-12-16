@@ -35,8 +35,9 @@ const getsearchfilter=function getsearchfilter(req,res){
 app.get("/prod/searchfilter",userCheckCookie,getsearchfilter);
 
 const filtersearchProd=async function filtersearchProd(req,res){
+    const allergy=await req.cookies.AuthCookie.user.allergy.split(",");
     try{
-        const prod=await prodData.filtersearchProd(req.params.Pname,req.cookies.AuthCookie);
+        const prod=await prodData.filtersearchProd(req.params.Pname,allergy);
         if(prod.length==0){
             res.render("prods/searchResultwrong");
         }else{
@@ -45,13 +46,9 @@ const filtersearchProd=async function filtersearchProd(req,res){
     }catch(e){
         res.status(500).json({error:e});
     }
-}
-app.get("prod/searchfilter/:Pname",filtersearchProd);
 
-const getfilterSearch=function getfilterSearch(req,res){
-    res.render("prods/filtersearchItem");
 }
-app.get("/prod/searchfilter",getfilterSearch);
+app.get("/prod/searchfilter/:Pname",filtersearchProd);
 
 const postfilterSearch=async function postfilterSearch(req,res){
     let postData=req.body;
@@ -59,7 +56,7 @@ const postfilterSearch=async function postfilterSearch(req,res){
     if (!postData.Pname) {
         errors.push("No Pname provided");
     }if (errors.length > 0) {
-        res.render("prods/searchItem", {
+        res.render("prods/filtersearchItem", {
           errors: errors,
           hasErrors: true,
           post: postData
