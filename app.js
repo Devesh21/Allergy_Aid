@@ -2,7 +2,9 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
-const cookieParser=require("cookie-parser")
+const cookieParser=require("cookie-parser");
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 const data=require("./data");
 const prodData=data.prod;
 /* Starting Express Server */
@@ -78,6 +80,9 @@ app.use("/public", static);
 app.engine('handlebars', exphbs({ defaultLayout:'main' }));
 app.set('view engine', 'handlebars');
 
+/* Passport */
+app.use(passport.initialize());
+app.use(passport.session());
 /* Routing Configuration */
 const configRoutes = require("./routes");
 configRoutes(app);
