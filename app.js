@@ -3,10 +3,13 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
 const cookieParser=require("cookie-parser");
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const expressValidator=require("express-validator");
+
 const data=require("./data");
 const prodData=data.prod;
+
 /* Starting Express Server */
 const app = express();
 
@@ -80,9 +83,13 @@ app.use("/public", static);
 app.engine('handlebars', exphbs({ defaultLayout:'main' }));
 app.set('view engine', 'handlebars');
 
+/* Validator */
+app.use(expressValidator());
+
 /* Passport */
 app.use(passport.initialize());
 app.use(passport.session());
+
 /* Routing Configuration */
 const configRoutes = require("./routes");
 configRoutes(app);
