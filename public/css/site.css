@@ -41,8 +41,16 @@ h1{
     color: #dc3545;
 }
 
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+#content-wrap {
+  padding-bottom: 1rem;    /* Footer height */
+}
+
 /* footer */
-  .footer {
+  #footer {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -51,3 +59,4 @@ h1{
     color:rgb(226, 221, 221);
     text-align: center;
   }
+
