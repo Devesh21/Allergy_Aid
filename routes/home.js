@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const data = require("../data");
+const userData = data.users;
+
 
 router.get('/', (req, res) => {
 	res.render('index/homepage');
@@ -23,6 +26,23 @@ router.get('/store/signup', (req,res) => {
 
 router.get('/store/login', (req,res) => {
     res.render('stores/login');
+});
+
+router.post("/checkEmail", async(req,res) => {
+    
+    var user;
+    try{
+    user = await userData.getUsersEmail(req.body.email);
+    console.log(user);
+    
+    }catch(err){
+        console.log("error: "+ err);
+    }
+    if(user){
+        res.send(true);
+    }else{
+        res.send(false);
+    }
 });
 
 module.exports = router;

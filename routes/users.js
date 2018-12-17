@@ -94,7 +94,9 @@ router.delete("/:id", async (req,res) => {
 router.get("/update/:id",async(req,res)=>{
     const id=req.params.id;
     res.render("users/updateProfile",{id:id});
-})
+});
+
+
 router.post("/update/:id", async (req, res) => {
     const updatedData = req.body;
     try {
@@ -102,7 +104,6 @@ router.post("/update/:id", async (req, res) => {
     } catch (e) {
         res.status(404).json({ error: "User not found" });
     }
-    
     try {
         const user = await userData.updateUser(req.params.id, updatedData);
         res.clearCookie("AuthCookie");
@@ -111,8 +112,7 @@ router.post("/update/:id", async (req, res) => {
     } catch (e) {
         res.status(500).json({ error: e });
     }
-    
-    
+        
 });
 
 

@@ -35,6 +35,12 @@ let exportedMethods = {
         
     },
 
+    async getUsersEmail(email){
+        const usersCollection = await users();
+        const user = await usersCollection.findOne({ email : email});
+        return user;
+    },
+
     async hash(password)
     {
         let hp;
