@@ -90,7 +90,7 @@ const getSearch=function getSearch(req,res){
 router.get("/search",getSearch);
 
 const postSearch=async function postSearch(req,res){
-    let postData = xss(req.body);
+    let postData = req.body;
     let errors=[];
     if (!postData.Pname) {
         errors.push("No Pname provided");
@@ -109,14 +109,14 @@ router.post("/search",postSearch);
 
 //addComment
 const getAddcomment=function getAddcomment(req,res){
-    let thisid = xss(req.params.id);
+    let thisid = req.params.id;
     res.render("prods/addFeedback",{id:thisid});
 }
 router.get("/addComment/:id",getAddcomment);
 
 const addComment=async function addComment(req,res){
-    const id = xss(req.params.id);
-    let postData = xss(req.body);
+    const id = req.params.id;
+    let postData = req.body;
     let errors=[];
     if (!postData.comment) {
         errors.push("No feedback provided");
@@ -131,8 +131,8 @@ const addComment=async function addComment(req,res){
         return;
     }
     try{
-        const newCom = xss(req.body.comment);
-        const id = xss(req.params.id);
+        const newCom = req.body.comment;
+        const id = req.params.id;
         await prodData.addComment(id,newCom);
         res.redirect(`/prod/id/${id}`);
     }catch(e){
