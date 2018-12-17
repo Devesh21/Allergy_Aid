@@ -35,7 +35,7 @@ router.post("/login", async (req, res) => {
         res.status(500).json({ error : err });
     }
 
-})
+});
 
 router.post("/", async (req, res) => {
     let userInfo = req.body;
