@@ -13,7 +13,7 @@ const main = async() => {
     "Hoboken",  // address
     "701-231-2321", // phone
     "stevens@stevens.edu",// email
-    "$2b$10$w5UYPtyqsGttPGK74Zlyt.V19pzL1OezIMq2X0H0IZOW2brtoNK/K" // password:stevens1234
+    "stevens1234"
 
   );
     const secondStore = await stores.addStore (
@@ -22,7 +22,7 @@ const main = async() => {
         "319 Route 130 East Windsor, New Jersey 08520",
         "(609) 448 - 1040",
         "shoprite@gmail.com",
-        "$2b$10$.HtNAAnTOen6RB8Se5Y2Uuby53QSduSsNap/Qu0pkQSPOaVBTd10K" // password:shoprite1234
+        "shoprite1234"
 
         );
     const thridStore = await stores.addStore (
@@ -30,14 +30,14 @@ const main = async() => {
         "20 Jersey Ave, New Brunswick, NJ 08901",
         "(732) 846-9360",
         "Walgreens@gmail.com",
-        "$2b$10$Nkl3J8pnnKTmD3ZbtyH8.ecKSlzTA3HqMsMLt6CHZmW6Wjc6NoI3m" // password:walgreen1234
+        "walgreen1234"
         );
   const firstUser = await users.addUser(
 
     "Sherlock", // fname
     "Holmes", // lname
     "Sherlock@gmail.com", // email
-    "$2b$10$G.Rmxol.0cZWK0byxoz4MekedVAiJmtO6khj62nJBWTnMrwv5Xotm", // password:damnyoujackdonaghy
+    "damnyoujackdonaghy",
     "221B Baker Street, London", // address
     "701-3432-1234", // mobile
     "Peanut" // allergy
@@ -46,7 +46,7 @@ const main = async() => {
     "Lebron",
     "James",
     "james@yahoo.com",
-    "$2b$10$p5P7cDWhYDtaksNv/gbcoOgpgymtPRpme5Cl6I0iGkNBXJ6aWAdJ6",//password:kingjames1234
+    "kingjames1234",
     "112 lakers ave, los angeles, CA",
     "621-678-9090",
     "pork meat"
@@ -56,7 +56,7 @@ const main = async() => {
     "Kobe",
     "Bryant",
     "KobeBryant@gmail.com",
-    "$2b$10$3I2xuZBKw70bkj3zMGseT.MQtQ6gUKEiAxHjh/idGC6DCoDZTcLKa",//password:kobe24bryant
+    "kobe24bryant",
     "456 lakers ave, los angeles, CA",
     "665-238-0090",
     "flowers"
