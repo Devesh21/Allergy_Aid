@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const data = require("../data");
 const userData = data.users;
+const storeData = data.stores;
 
 
 router.get('/', (req, res) => {
@@ -29,12 +30,9 @@ router.get('/store/login', (req,res) => {
 });
 
 router.post("/checkEmail", async(req,res) => {
-    
     var user;
     try{
     user = await userData.getUsersEmail(req.body.email);
-    console.log(user);
-    
     }catch(err){
         console.log("error: "+ err);
     }
@@ -44,5 +42,20 @@ router.post("/checkEmail", async(req,res) => {
         res.send(false);
     }
 });
+
+router.post("/checkStoreEmail", async(req,res) => {
+    var user;
+    try{
+    user = await storeData.getStoreEmails(req.body.email);
+    }catch(err){
+        console.log("error: "+ err);
+    }
+    if(user){
+        res.send(true);
+    }else{
+        res.send(false);
+    }
+});
+
 
 module.exports = router;

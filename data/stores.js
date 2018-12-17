@@ -34,7 +34,13 @@ let exportedMethods = {
         else{
             throw "Invalid Email ID or Password";
 		}
-    },
+	},
+	
+	async getStoreEmails(email){
+		const StoresCollection = await stores();
+		const store = await StoresCollection.findOne({email:email});
+		return store;
+	},
 
 	async hash(password)
     {

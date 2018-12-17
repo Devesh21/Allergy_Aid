@@ -13,21 +13,23 @@
                                     <div class="form-group">
                                     <label class="control-label">First Name:</label>
                                     <div>
-                                    <input type="text" name="fname" class="form-control" placeholder="First name">
+                                    <input type="text" name="fname" id="fName" class="form-control" placeholder="First name" required>
+                                    <div id="fname_alert"></div>
                                     </div>
                                     </div>
 
                                     <div class="form-group">
                                     <label class="control-label">Last Name:</label>
                                     <div>
-                                    <input type="text" name="lname" class="form-control" placeholder="Last name">
+                                    <input type="text" name="lname" id="lName" class="form-control" placeholder="Last name" required>
+                                    <div id="lname_alert"></div>
                                     </div>
                                     </div>
 
                                     <div class="form-group">
                                     <label class="control-label">Email:</label>
                                     <div>
-                                    <input type="text" name="email" id="email" class="form-control" placeholder="Email">
+                                    <input type="text" name="email" id="email" class="form-control" placeholder="Email" required>
                                     <div id="emailID_alert"></div>
                                     </div>
                                     </div>
@@ -35,33 +37,37 @@
                                     <div class="form-group">
                                     <label class="control-label">Password:</label>
                                     <div>
-                                    <input type="password"  class="form-control" name="password" placeholder="password">
+                                    <input type="password"  class="form-control" id="pass" name="password" placeholder="password" required>
+                                    <div id="password_alert"></div>
                                     </div>
                                     </div>
 
                                     <div class="form-group">
                                     <label class="control-label">Address:</label>
                                     <div>
-                                    <input type="text" name="address" class="form-control" placeholder="Address">
+                                    <input type="text" id="add" name="address" class="form-control" placeholder="Address" required>
+                                    <div id="address_alert"></div>
                                     </div>
                                     </div>
 
                                     <div class="form-group">
                                     <label class="control-label">Allergy:</label>
                                     <div>
-                                    <input type="text" name="allergy" class="form-control" placeholder="Allergy">
+                                    <input type="text" id="aller" name="allergy" class="form-control" placeholder="Allergy" required>
+                                    <div id="allergy_alert"></div>
                                     </div>
                                     </div>
 
                                     <div class="form-group">
                                     <label class="control-label">Mobile Number:</label>
                                     <div>
-                                    <input type="number" name="mobile" class="form-control" placeholder="Mobile Number">
+                                    <input type="number" id="mob" name="mobile" class="form-control" placeholder="Mobile Number" required>
+                                    <div id="mobile_alert"></div>
                                     </div>
                                     </div>
 
                                     <div class="form-group text-center">
-                                    <button type="submit" class="button button4">Register</button>
+                                    <button type="submit" id="signup" class="button button4">Register</button>
                                     </div>
                                 </form>
                             </div>

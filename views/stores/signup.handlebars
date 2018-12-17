@@ -13,40 +13,41 @@
                                     <div class="form-group">
                                     <label class="control-label">Store Name:</label>
                                     <div>
-                                    <input type="text" name="storeName" class="form-control" placeholder="Store Name">
+                                    <input type="text" name="storeName" class="form-control" placeholder="Store Name" required>
                                     </div>
                                     </div>
 
                                     <div class="form-group">
                                     <label class="control-label">Address:</label>
                                     <div>
-                                    <input type="text" name="address" class="form-control" placeholder="Address">
+                                    <input type="text" name="address" class="form-control" placeholder="Address" required>
                                     </div>
                                     </div>
 
                                     <div class="form-group">
                                     <label class="control-label">Phone:</label>
                                     <div>
-                                    <input type="text" name="phone_no" class="form-control" placeholder="Phone">
+                                    <input type="text" name="phone_no" class="form-control" placeholder="Phone" required>
                                     </div>
                                     </div>
 
                                     <div class="form-group">
                                     <label class="control-label">Email:</label>
                                     <div>
-                                    <input type="text" name="email" class="form-control" placeholder="Email">
+                                    <input type="text" id="email" name="email" class="form-control" placeholder="Email" required>
+                                    <div id="emailID_alert"></div>
                                     </div>
                                     </div>
 
                                     <div class="form-group">
                                     <label class="control-label">Password:</label>
                                     <div>
-                                    <input type="password"  class="form-control" name="password" placeholder="password">
+                                    <input type="password"  class="form-control" name="password" placeholder="password" required>
                                     </div>
                                     </div>
 
                                     <div class="form-group text-center">
-                                    <button type="submit" class="button button4">Register</button>
+                                    <button type="submit" id="signup" class="button button4">Register</button>
                                     </div>
                                 </form>
                             </div>
@@ -57,3 +58,5 @@
         </div>
     </div>
 </div>
+
+<script src="/public/js/registerStore.js"></script>

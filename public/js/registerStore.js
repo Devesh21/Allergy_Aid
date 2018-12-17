@@ -1,7 +1,7 @@
 $("#email").focusout(function(){
     $.ajax({
         type: "POST",
-        url: '/checkEmail',
+        url: '/checkStoreEmail',
         data: {email:$(this).val()},
         success: function(data){
             if (data){
