@@ -1,7 +1,13 @@
 Allergy Aid
 
+unzip the .zip file and follow the instructions below.
+
 Instructions to run the code:
-1. Run command prompt as 'Run as Administrator' and execute command 'mongod'.
-2. Install all the dependencies from 'package.json' by executing 'npm install' command.
-3. Seed database by executing 'npm run seed' command.
-4. Run another command prompt and start the program by executing 'npm start' command.
+1. Open command prompt
+2. Execute command "mongod".
+3. Open another command prompt window in the folder where the zip file is unzipped.
+4. Execute command "npm install".
+5. Execute command "npm run seed".
+6. Execute command "npm npm start".(Now the routes will be running.)
+7. Open browser and go to "http://localhost:3000"
+8. Follow the presentation video for any further instructions.
