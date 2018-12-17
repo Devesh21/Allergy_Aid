@@ -125,7 +125,46 @@ const main = async() => {
     "Our company took great care to formulate a nerve repair cream safe for those sensitive to overpowering pharmaceuticals. Our all-natural supplement providessupport through vitamins and antioxidants that may reduce nerve pain and nerve damag",
      ""
     );
-    
+    const eigthProd = await prods.addProd(
+    "Advil Allergy & Congestion Relief ", // prod name
+    id_3, // store id
+    "Chlorpheniramine maleate, Ibuprofen, Acesulfame Potassium, Artificial Flavors, Carnauba Wax, Colloidal Silicon Dioxide, Corn Starch, Croscarmellose Sodium, Glycerin, Glyceryl Behenate, Hypromellose, Lactic Acid, Lecithin, Maltodextrin, Medium-Chain Triglycerides, Microcrystalline Cellulose, Pharmaceutical Ink, Polydextrose, Polyvinyl Alcohol, Pregelatinized Starch, Propyl Gallate, Silicon Dioxide, Sucralose, Synthetic Iron Oxide, Talc, Titanium Dioxide, Triacetin, Xanthan Gum.", // ingrendients
+    "Includes 50 one tablet dose packets of Advil Allergy & Congestion Relief, individually-wrapped coated tablets OTC relief formulti symptom sinus and allergyneeds includingsinus pressure, nasal swelling and congestion, sneezing, runny nose and headache Ibuprofen, antihistamine and nasal decongestant formula helps relieve upper respiratory symptoms associated with allergies",
+    ""
+    );
+
+
+    const ninthProd = await prods.addProd(
+    "GoodSense All Day Allergy", // prod name
+    id_2, // store id
+    "Cetirizine HCl 10 mg. INACTIVE INGREDIENTS: corn starch, FD&C blue no. 1 aluminum lake, hypromellose, lactose monohydrate, magnesium stearate, polydextrose, polyethylene glycol, povidone, titanium dioxide, triacetin",
+    "Cetirizine Hydrochloride Tablets, 10 mg active ingredient is Cetirizine Hydrochloride, 10 mg, an antihistamine approved for the treatment of both indoor and outdoor allergy symptoms. One dose of Cetirizine Hydrochloride Tablets, 10 mg works for a full 24 hours.",
+    "Everyone seems to be saying the same thing but my nose is dripping from allergies in ways that name brand doesn't. I think quality control is much worse and you'll notice if you have real allergies. "
+    );
+
+    const tenthProd = await prods.addProd(
+    "Rootology Breathe Free", // prod name
+    id_2, // store id
+    "Concentrated herbal extract blend: Xanthium Fruit, Magnolia Flower, Platycodon Root, Angelica Root, Forsythia Fruit, Cinnamon Twig, Schizonepeta Stem, Ledebouriella Root, Schisandra Fruit, Chrysanthemum Flower, Anemarrhena Root, Phellondendron Bark, Licorice Root, Vitamin C, Vitamin D",
+    "What is root ology and how does it work? Nasal & sinus health can quickly deteriorate and make our lives miserable, whether due to pollen, dust, mold, chemicals, wildfire smoke or whatever's in the air that may congest or trigger a sneeze. Root ology is a blend of 13 concentrated herbal extracts to support against sneezing, congestion, sinus pressure, runny nose, itchy watery eyes and headache",
+    ""
+    );
+
+    const eleventhProd = await prods.addProd(
+    "Boiron Sinusalia", // prod name
+    id_1, // store id
+    "Belladonna 3C HPUS (contains less than 10-8 mg alkaloids per dose), Sanguinaria canadensis 3C HPUS, Spigelia anthelmia 3C HPUS",
+    "Boiron was founded in 1932 in Lyon, France, by twin brothers and pharmacists Jean and Henri Boiron. As the world leader in homeopathic medicines, Boiron is a $852 million public company with 3,700 employees and distribution in 59 countries. It is best known for Oscillococcinum, a top-selling flu medicine, and its Arnicare line of pain relievers. For more than 80 years, Boiron has been committed to funding scientific research and educating the public and health care professionals on homeopathic medicines. ",
+    ""
+    );
+
+    const tweleventhProd = await prods.addProd(
+    "Peanut Butter", // prod name
+    id_3, // store id
+    "PEANUTS, SUGAR, HONEY, CORN SYRUP, COCOA (PROCESSED WITH ALKALI), PEANUT OIL, FRUCTOSE, SEA SALT, GUM ARABIC, NATURAL FLAVOR, XANTHAN GUM",
+    "Planters Flavored Peanuts, Cocoa, 6 Ounce Canister",
+    "very good"
+    );
 
     
 
