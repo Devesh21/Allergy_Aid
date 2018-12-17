@@ -2,15 +2,16 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
-const cookieParser=require("cookie-parser");
+const cookieParser = require("cookie-parser");
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const expressValidator=require("express-validator");
-const flash=require("connect-flash");
-const session=require("express-session");
+const expressValidator = require("express-validator");
+const flash = require("connect-flash");
+const session = require("express-session");
 
-const data=require("./data");
-const prodData=data.prod;
+const data = require("./data");
+const prodData = data.prod;
+
 
 /* Starting Express Server */
 const app = express();
@@ -50,7 +51,7 @@ const filtersearchProd=async function filtersearchProd(req,res){
 }
 app.get("/prod/searchfilter/:Pname",filtersearchProd);
 
-const postfilterSearch=async function postfilterSearch(req,res){
+const postfilterSearch = async function postfilterSearch(req,res){
     let postData=req.body;
     let errors=[];
     if (!postData.Pname) {

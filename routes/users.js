@@ -6,6 +6,8 @@ const cookies = require('cookie-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+const xss = require("xss");
+
 router.get("/:id", async (req, res) => {
     try {
         const user = await userData.getUserById(req.params.id);
@@ -76,7 +78,7 @@ router.post("/", async (req, res) => {
 
 router.delete("/:id", async (req,res) => {
     try{
-        checkuser = await userData.getUserById(req.body.id);
+        checkuser = await userData.getUserById(xss(req.body.id));
         if(checkuser){
             try{
                 let deleteUser = await userData.removeUser(req.body.id);
@@ -92,7 +94,7 @@ router.delete("/:id", async (req,res) => {
 
 /* Updated part */
 router.get("/update/:id",async(req,res)=>{
-    const id=req.params.id;
+    const id = req.params.id;
     res.render("users/updateProfile",{id:id});
 });
 

@@ -67,7 +67,10 @@ document.getElementById("form-logout").submit();
     integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" 
     crossorigin="anonymous"></script>
 
-
+<script src="https://rawgit.com/leizongmin/js-xss/master/dist/xss.js"></script>
+<script>
+var html = filterXSS('<script>alert("xss");</scr' + 'ipt>');
+</script>
 
 <form method="post" action="/users/logout" id="form-logout"></form>
 
