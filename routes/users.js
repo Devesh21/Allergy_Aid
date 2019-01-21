@@ -32,6 +32,7 @@ router.post("/login", async (req, res) => {
     try{
         const user = await userData.getUserByEmail(loginUsername,loginPassword);
         res.cookie("AuthCookie", {user});
+        req.session.user = user;
         res.redirect(`/users/${user._id}`)
     }catch(err){
         res.status(500).json({ error : err });
