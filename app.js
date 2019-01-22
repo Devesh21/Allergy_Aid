@@ -71,6 +71,7 @@ app.post("/prod/searchfilter",postfilterSearch);
 /*clear cookie*/
 const getlogout=function getlogout(req,res){
     res.clearCookie("AuthCookie");
+    
     res.render("index/logout",{title:"Loged out"});
 }
 app.get("/logout",getlogout);

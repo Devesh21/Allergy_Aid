@@ -1,10 +1,13 @@
 <link rel="stylesheet" href="/public/css/users/users.css">
-<div class="users">
-  <h1>{{user.fname}} {{user.lName}}</h1>
-  <h2>E-mail</h2>
+<div class="users" style="background-color: white; margin:auto; width:300px; margin-bottom: 20px; padding:30px;">
+  <h2>{{user.fname}} {{user.lName}}</h2>
+  <h4>E-mail</h4>
   <p>{{ user.email }}</p>
-  <h2>Address</h2>
+  <h4>Address</h4>
   <p>{{ user.address }}</p>
-  <h2>Allergy</h2>
+  <h4>Allergies:</h4>
   <p>{{ user.allergy }}</p>
-<a href="/users/update/{{user._id}}">Edit Profile </a>
+  <div style="padding-top: 20px">
+    <a href="/users/update/{{user._id}}" style="padding:10px; border:2px solid green; text-align:center; text-decoration:none" >Edit Profile </a>
+  </div>
+</div>

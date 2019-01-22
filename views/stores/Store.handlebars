@@ -1,17 +1,36 @@
-  <link rel="stylesheet" href="/public/css/stores/store.css">
-  <h1>{{ stores.storeName }}</h1>
-  <h2>Address</h2>
-  <p>{{ stores.address }}</p>
-  <h2>Phone</h2>
-  <p>{{stores.phone_no}}</p>
-  <h2>Email</h2>
-  <p>{{stores.email}}</p>
+<link rel="stylesheet" href="/public/css/stores/store.css">
 
-  <a href="/prod/addItem/{{stores._id}}">Add Item</a>
-   <h1>Items</h1>
-  {{#each storeProds}}  
-      <h2><a href="/prod/id/storeverison/{{_id}}">{{Pname}}</a></h2>
-      <p>{{feedback}}</p>
-  {{/each}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-sm-12 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="panel-body" >
 
-  
+                            <h1>{{ stores.storeName }}</h1>
+                            <h2 >Address</h2>
+                            <p style="color:black"> {{ stores.address }}</p>
+                            <h2>Phone</h2>
+                            <p style="color:black">{{stores.phone_no}}</p>
+                            <h2>Email</h2>
+                            <p style="color:black">{{stores.email}}</p>
+                        
+                            <div style="margin:auto">
+                            <a href="/prod/addItem/{{stores._id}}" style="padding:10px; border:2px solid green; text-align:center; text-decoration:none">Add Item</a>
+                            </div>
+                            
+                            <h3><center> Items </center></h3>
+                            {{#each storeProds}}  
+                                <p><a href="/prod/id/storeverison/{{_id}}">{{Pname}}</a></p>
+                                <p>{{feedback}}</p>
+                            {{/each}}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
